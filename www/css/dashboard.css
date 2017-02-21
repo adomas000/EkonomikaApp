@@ -13,4 +13,11 @@
 .dash-card{
     width:45%;
     margin: 15px auto;
+
+}
+.dash-card:hover *{
+    background-color:grey!important;
+    color:black!important;
+    transition: 0.1s;
+    
 }

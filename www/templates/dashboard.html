@@ -1,4 +1,4 @@
-
+<div ng-controller="dashCtrl">
 <h1 style="text-align: center;" class="dash-title">  Welcome to the dashboard</h1>
     <div class="row dash-row">
         <div class="card dash-card">
@@ -28,4 +28,12 @@
             </div>
         </div>
     </div>
-    
+ <div class="row dash-row">
+        <div class="card dash-card " id= "dash-user" style="width:95%;">
+            <div class="item item-text-wrap">
+                <i class="ion-person"></i>
+                <p style="text-align: center;">{{user.fullName()}}</p>
+            </div>
+        </div> 
+ </div>   
+</div>

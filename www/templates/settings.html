@@ -1,13 +1,15 @@
-<ul class="list">
+<div ng-controller="settingsCtrl">
+  <ul class="list">
 
-  <li class="item item-toggle">
-     HTML5
-     <label class="toggle toggle-assertive">
-       <input type="checkbox">
-       <div class="track">
-         <div class="handle"></div>
-       </div>
-     </label>
-  </li>
+    <li class="item item-toggle">
+      HTML5
+      <label class="toggle toggle-assertive" >
+        <input type="checkbox" ng-click="handleCheck(0)">
+        <div class="track">
+          <div class="handle"></div>
+        </div>
+      </label>
+    </li>
 
-</ul>
+  </ul>
+</div>

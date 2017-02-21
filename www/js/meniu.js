@@ -17,7 +17,13 @@ angular.module("App")
              $ionicSideMenuDelegate.toggleLeft();
             //console.log("meniu");
         }
-        console.log("first");
+        
+        $scope.exitApp = function(item){
+                if(item == "Exit App"){
+                        console.log("exit");
+                        ionic.Platform.exitApp();
+                }
+        }
+        
 
 })
-

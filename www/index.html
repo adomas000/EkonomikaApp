@@ -35,6 +35,10 @@
     <script src="js/app.js"></script>
     <script src="js/meniu.js"></script>
     <script src="js/router.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/FACTORY.js"></script>
+    <!--end of js-->
   </head>
   <body ng-app="App" ng-controller="mainCtrl">
         
@@ -55,7 +59,7 @@
               <!-- Left menu -->
               <ion-side-menu side="left">
                 <div class="list">
-                  <a class="item" href='#/{{item.toLowerCase()}}' ng-repeat="item in meniuItems" ng-click="toggleMeniu()">
+                  <a class="item" href='#/{{item.toLowerCase()}}' ng-repeat="item in meniuItems" ng-click="toggleMeniu();exitApp(item)">
                     {{item}}
                   </a>
                 </div>
