@@ -17,6 +17,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1f1f', end
 }
 
 .background *{
+    background: transparent;
     color:white!important;
     font-family: 'Open Sans', sans-serif;
 }
