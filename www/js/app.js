@@ -37,7 +37,6 @@ angular.module('App', ['ionic','ngCordova'])
     // wait till everything is loaded, argument for time to wait
      _DB.showRegisterWindow(1000);
       
-     _DB.insert("Adomas","paslaptis");
      
   });
  

@@ -1,11 +1,27 @@
 <div ng-controller="registerCtrl">
-<h1>Hey, Please register so we could track your progress :)</h1>
-    <div class="list list-inset">
-    <label class="item item-input">
-        <input type="text" placeholder="First Name">
-    </label>
-    <label class="item item-input">
-        <input type="text" placeholder="Last Name">
-    </label>
-    </div>
+<h1 style="font-size: 24px;text-align: center;">Hey, Please register so we could track your progress :)</h1>
+  <form name="myForm" novalidate>
+      
+     <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" placeholder="First Name" name="fname" ng-model="fname"  ng-minlength="2" required>
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Last Name" name="lname" ng-model="lname"  ng-minlength="2" required>
+            </label>
+            <button class="button button-block button-royal" ng-click="handleRegistration()" ng-disabled="myForm.$invalid">
+                GO!
+            </button>
+
+            <div class="card">
+                <div class="item item-text-wrap" style="color:red!important" ng-show="myForm.fname.$error.minlength">
+                   *first name must be atleast 2 characters long!
+                </div>
+                 <div class="item item-text-wrap" style="color:red!important" ng-show="myForm.lname.$error.minlength">
+                   *last name must be atleast 2 characters long!
+                </div>
+            </div>
+        </div>
+
+  </form>
 </div>

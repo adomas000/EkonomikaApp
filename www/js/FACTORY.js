@@ -2,22 +2,20 @@ angular.module("App")
 
 .factory("_USER",function(){
     var obj = {
-        name          : "",
+        fname         : "",
         lname         : "",
         StartDate     : null,
         isNull        : true,
         fullName      : function(){
-            return this.name + " " + this.lname;
+            return this.fname + " " + this.lname;
         },
-        changeUserData: function(name,lname,StartDate){
-            if(arguments.length==1)
-                this.name  = name;
-            else if(arguments.length==2)
+        changeUserData: function(fname,lname,StartDate){
+            
+                this.fname = fname;            
                 this.lname = lname;
-            else
                 this.StartDate = StartDate;
 
-            if((obj.name && obj.lname)!="")
+            if((obj.fname && obj.lname)!="")
                 obj.isNull = false;
         }
     };
@@ -42,7 +40,8 @@ angular.module("App")
        }
 
        obj.insert = function (firstname, lastname, StartDate) {
-
+            if(obj.rowsLength!=0)
+                return;
            var query = "INSERT INTO User (firstname, lastname, StartDate) VALUES (?,?,?)";
            $cordovaSQLite.execute(obj.db, query, [firstname, lastname, StartDate]).then(function (res) {
                console.log("\n ADDED ->" + res.insertId);

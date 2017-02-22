@@ -10,8 +10,13 @@ angular.module("App")
 
     })
     .state("dashboard",{
+        cache: false,
         url: '/dashboard',
         templateUrl: 'templates/dashboard.html'
+    })
+    .state("userInfo",{
+        url: '/userInfo',
+        templateUrl: ' templates/userInfo.html'
     })
     .state("register",{
         url: '/register',
