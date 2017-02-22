@@ -18,6 +18,11 @@ angular.module("App")
         url: '/userInfo',
         templateUrl: ' templates/userInfo.html'
     })
+    .state("status",{
+        cache:false,
+        url:'/status',
+        templateUrl:"templates/status.html"
+    })
     .state("register",{
         url: '/register',
         templateUrl: 'templates/register.html'

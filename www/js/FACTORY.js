@@ -30,10 +30,10 @@ angular.module("App")
 .factory("_DB",function($cordovaSQLite){
     console.log("initializing database factory");
     var obj = {
-        dbName:"",
-        db:null,
-        database:null,
-        rowsLength:null
+        dbName      :"",
+        db          :null,
+        database    :null,
+        rowsLength  :null
     };
        obj.setdb  = function(db){
            this.db = db;
