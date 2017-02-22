@@ -12,6 +12,10 @@ angular.module("App")
     .state("dashboard",{
         url: '/dashboard',
         templateUrl: 'templates/dashboard.html'
+    })
+    .state("register",{
+        url: '/register',
+        templateUrl: 'templates/register.html'
     });
 
     $urlRouterProvider.otherwise('dashboard');

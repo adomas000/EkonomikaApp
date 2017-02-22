@@ -8,7 +8,7 @@ angular.module('App', ['ionic','ngCordova'])
 
 
 
-.run(function($ionicPlatform,$cordovaSQLite,_DB) {
+.run(function($ionicPlatform,$cordovaSQLite,_DB,_USER) {
   
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -24,38 +24,23 @@ angular.module('App', ['ionic','ngCordova'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-     var dbName = "my.db";
-     _DB.dbName = dbName;
-       try{
-          var db = $cordovaSQLite.openDB({ name: dbName, location: "default"});
-          $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS User (firstname text, lastname text, StartDate text)");
-          _DB.setdb(db);
-          console.log("database was created succesfully");
-            //Log.d("test", "database created");
-        }
-        catch(e){
-            console.log("database was not created\n"+ e);
-            
-            //Log.d("test", "database not created");
-        }
-      // testing
+    // database settings
+    var database = {
+      name:"my.db",
+      location:"default"
+    };
+     _DB.database = database;
+    // starting database
+     _DB.startDatabase();
+    // setting rows length
+     _DB.setRowsLength();
+    // wait till everything is loaded, argument for time to wait
+     _DB.showRegisterWindow(1000);
       
-      var time = new Date().getFullYear() +":"+ new Date().getMonth()+":"+ new Date().getDate();
-      time = time.toString();
+     _DB.insert("Adomas","paslaptis");
      
-      if(_DB.db)
-        _DB.insert("Adomas","Griskelis",time);
-   
-       _DB.showTableData();
-
-       _DB.removeDatabase();
-
-    
   });
-  //creating table
-  //var db = $cordovaSQLite.openDB("my.db");
-  //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS User (firstname text, lastname text, StartDate text)");
-
+ 
 
 })
 
