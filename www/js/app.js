@@ -3,9 +3,13 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('App', ['ionic'])
 
-.run(function($ionicPlatform) {
+angular.module('App', ['ionic','ngCordova'])
+
+
+
+.run(function($ionicPlatform,$cordovaSQLite,_DB) {
+  
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,5 +24,38 @@ angular.module('App', ['ionic'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+     var dbName = "my.db";
+     _DB.dbName = dbName;
+       try{
+          var db = $cordovaSQLite.openDB({ name: dbName, location: "default"});
+          $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS User (firstname text, lastname text, StartDate text)");
+          _DB.setdb(db);
+          console.log("database was created succesfully");
+            //Log.d("test", "database created");
+        }
+        catch(e){
+            console.log("database was not created\n"+ e);
+            
+            //Log.d("test", "database not created");
+        }
+      // testing
+      
+      var time = new Date().getFullYear() +":"+ new Date().getMonth()+":"+ new Date().getDate();
+      time = time.toString();
+     
+      if(_DB.db)
+        _DB.insert("Adomas","Griskelis",time);
+   
+       _DB.showTableData();
+
+       _DB.removeDatabase();
+
+    
   });
+  //creating table
+  //var db = $cordovaSQLite.openDB("my.db");
+  //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS User (firstname text, lastname text, StartDate text)");
+
+
 })
+

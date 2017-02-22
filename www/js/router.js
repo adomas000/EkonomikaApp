@@ -6,14 +6,14 @@ angular.module("App")
 
     .state("settings",{
         url: '/settings',
-        templateUrl: '../templates/settings.html'
+        templateUrl: 'templates/settings.html'
 
     })
     .state("dashboard",{
         url: '/dashboard',
-        templateUrl: '../templates/dashboard.html'
+        templateUrl: 'templates/dashboard.html'
     });
 
-    $urlRouterProvider.otherwise('../templates/dashboard.html');
+    $urlRouterProvider.otherwise('dashboard');
 
 });
