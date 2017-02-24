@@ -3,8 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
+angular.module('App', ['ionic','ngCordova',"chart.js"])
 
-angular.module('App', ['ionic','ngCordova'])
 
 
 
@@ -24,7 +24,7 @@ angular.module('App', ['ionic','ngCordova'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-    // database settings
+    // database init settings
     var database = {
       name:"my.db",
       location:"default"
@@ -46,7 +46,7 @@ angular.module('App', ['ionic','ngCordova'])
             
         });
         
-      
+      console.log(window.location.href);
         
 
      
