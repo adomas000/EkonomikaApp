@@ -27,7 +27,7 @@ angular.module("App")
 
 // database
 
-.factory("_DB",function($cordovaSQLite){
+.factory("_DB",function($cordovaSQLite,_USER){
     console.log("initializing database factory");
     var obj = {
         dbName      :"",
@@ -51,11 +51,15 @@ angular.module("App")
 
            obj.setRowsLength();
        }
-       obj.select = function (lastname, StartDate) {
-           var query = "SELECT firstname ,lastname, StartDate FROM User WHERE lastname = ? and StartDate = ?";
-           $cordovaSQLite.execute(obj.db, query, [lastname, StartDate]).then(function (res) {
+       obj.select = function (_callback) {
+          
+           var query = "SELECT firstname ,lastname, StartDate FROM User";
+           $cordovaSQLite.execute(obj.db, query).then(function (res) {
                if (res.rows.length > 0) {
-                   console.log("\nSELECTED ->" + res.rows.item(0).firstname + res.rows.item(0).lastname);
+                   console.log("\nSELECTED ->" + res.rows.item(0).firstname + " " + res.rows.item(0).lastname+" "+ res.rows.item(0).StartDate);
+                   //mind blown
+                _callback(res.rows.item(0));
+                
                }
                else {
                    console.log("\n didn't find any matching user");
@@ -63,7 +67,7 @@ angular.module("App")
            },function(err){
                 console.error("\n err");
            });
-
+           
        }
        obj.setRowsLength = function(){
            var query = "SELECT * FROM User" ;
@@ -103,6 +107,8 @@ angular.module("App")
                     console.error(err);
                 });
                 obj.setdb(db);
+                
+
                 console.log("database was created succesfully");
                 //Log.d("test", "database created");
             }

@@ -36,7 +36,19 @@ angular.module('App', ['ionic','ngCordova'])
      _DB.setRowsLength();
     // wait till everything is loaded, argument for time to wait
      _DB.showRegisterWindow(1000);
+      //handling async function with callback
+      if(_DB.rowsLength!=0)
+         _DB.select(function(data){
+
+            _USER.changeUserData(data.firstname,data.lastname,data.StartDate);
+            if(!_USER.isNull)
+            console.log("user data has been updated succesfully");
+            
+        });
+        
       
+        
+
      
   });
  

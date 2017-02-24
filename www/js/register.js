@@ -5,7 +5,7 @@ angular.module("App")
     $scope.handleRegistration = function(){
         var fname = $scope.fname;
         var lname = $scope.lname;
-        var time  = new Date().getFullYear()+":"+ new Date().getMonth() +":" + new Date().getDay() + ":" + new Date().getHours() + new Date().getMinutes() + ":" + new Date().getSeconds();
+        var time  = new Date().getFullYear()+"/"+ new Date().getMonth() +"/" + new Date().getDay() + "  " + new Date().getHours()+":" + new Date().getMinutes() + ":" + new Date().getSeconds();
 
         _DB.insert(fname,lname,time);
         _USER.changeUserData(fname,lname,time);
