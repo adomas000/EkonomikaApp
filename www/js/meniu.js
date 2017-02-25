@@ -1,6 +1,6 @@
 angular.module("App")
 
-.controller("mainCtrl",function($scope,$ionicSideMenuDelegate){
+.controller("mainCtrl",function($scope,$ionicSideMenuDelegate,$ionicLoading){
         //meniu
         $scope.meniuItems = [
                 "Dashboard",
@@ -24,6 +24,6 @@ angular.module("App")
                         ionic.Platform.exitApp();
                 }
         }
-        
 
+    
 })

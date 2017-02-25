@@ -9,15 +9,59 @@ angular.module("App")
         fullName      : function(){
             return this.fname + " " + this.lname;
         },
-        changeUserData: function(fname,lname,StartDate){
+        changeUserData: function(fname,lname,StartDate,data){
             
                 this.fname = fname;            
                 this.lname = lname;
                 this.StartDate = StartDate;
+                this.funds = JSON.parse(data);
 
             if((obj.fname && obj.lname)!="")
                 obj.isNull = false;
+        },
+
+        //the main funds object
+        funds         :{
+
+           startBalance:0,
+            currBalance:0,
+             startDate :{year:null,month:null,day:null},
+               currDate:{year:null,month:null,day:null},
+                  data :[
+                /* {
+                      date:{year:null,month:null,day:null},
+                    balace:null,
+                   dayData:[
+                       {
+                        balanceChange:null,
+                        time:null,
+                        item:""
+                       }
+                         
+                   ]
+                      
+                 }*/
+            ]
+
+        },
+      firstTimeInit:function(){
+            var year  = new Date().getFullYear();
+            var month = new Date().getMonth();
+            var day   = new Date().getDay();
+            
+            obj.funds.startDate = {year:year,month:month,day:day};
+        },
+          setUpData:function(balance){
+
+        },
+        insertFunds:function(moneyAdded){
+
+        },
+        removeFunds:function(moneyRemoved){
+
         }
+
+        
     };
     //
     
@@ -39,21 +83,21 @@ angular.module("App")
            this.db = db;
        }
 
-       obj.insert = function (firstname, lastname, StartDate) {
+       obj.insert = function (firstname, lastname, StartDate, data) {
             if(obj.rowsLength!=0)
                 return;
-           var query = "INSERT INTO User (firstname, lastname, StartDate) VALUES (?,?,?)";
-           $cordovaSQLite.execute(obj.db, query, [firstname, lastname, StartDate]).then(function (res) {
+           var query = "INSERT INTO User (firstname, lastname, StartDate, data) VALUES (?,?,?,?)";
+           $cordovaSQLite.execute(obj.db, query, [firstname, lastname, StartDate,JSON.stringify(_USER.funds)]).then(function (res) {
                console.log("\n ADDED ->" + res.insertId);
            }, function (err) {
-               console.error(err);
+               console.error(JSON.stringify(err));
            });
 
            obj.setRowsLength();
        }
        obj.select = function (_callback) {
           
-           var query = "SELECT firstname ,lastname, StartDate FROM User";
+           var query = "SELECT firstname ,lastname, StartDate, data FROM User";
            $cordovaSQLite.execute(obj.db, query).then(function (res) {
                if (res.rows.length > 0) {
                    console.log("\nSELECTED ->" + res.rows.item(0).firstname + " " + res.rows.item(0).lastname+" "+ res.rows.item(0).StartDate);
@@ -76,6 +120,7 @@ angular.module("App")
                 // for(var i =0;i<res.rows.length;i++)
                 //     console.log(JSON.stringify(res.rows.item(i))+"\n");         
                     obj.rowsLength = res.rows.length;
+                
            }, function(err){
                     console.error(err.message);
            });
@@ -100,7 +145,7 @@ angular.module("App")
             //
             try {
                 var db = $cordovaSQLite.openDB(obj.database);
-                $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS User (firstname text, lastname text, StartDate text)").then(function (res) {
+                $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS User (firstname text, lastname text, StartDate text, data text)").then(function (res) {
                     console.log("CREATING_TABLE - " + JSON.stringify(res));
 
                 }, function (err) {
@@ -134,4 +179,26 @@ angular.module("App")
        }
 
     return obj;
-});
+})
+
+.factory("_Loading",function($ionicLoading){
+    var obj = {
+
+        show:function() {
+                $ionicLoading.show({
+                        template: 'Loading...'
+                }).then(function () {
+                        console.log("The loading indicator is now displayed");
+                });
+        },
+
+        hide:function () {
+                $ionicLoading.hide().then(function () {
+                        console.log("The loading indicator is now hidden");
+                });
+        }
+
+    };
+
+    return obj
+})

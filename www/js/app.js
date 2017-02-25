@@ -8,7 +8,7 @@ angular.module('App', ['ionic','ngCordova',"chart.js"])
 
 
 
-.run(function($ionicPlatform,$cordovaSQLite,_DB,_USER) {
+.run(function($ionicPlatform,$cordovaSQLite,_DB,_USER,_Loading) {
   
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -25,6 +25,7 @@ angular.module('App', ['ionic','ngCordova',"chart.js"])
       StatusBar.styleDefault();
     }
     // database init settings
+   //_Loading.show();
     var database = {
       name:"my.db",
       location:"default"
@@ -34,19 +35,34 @@ angular.module('App', ['ionic','ngCordova',"chart.js"])
      _DB.startDatabase();
     // setting rows length
      _DB.setRowsLength();
-    // wait till everything is loaded, argument for time to wait
-     _DB.showRegisterWindow(1000);
-      //handling async function with callback
-      if(_DB.rowsLength!=0)
-         _DB.select(function(data){
+    var check1 = setInterval(function(){
+      if(_DB.rowsLength!=null)
+      {
+         go();
+         clearInterval(check1);
+      }            
+    },50);
 
-            _USER.changeUserData(data.firstname,data.lastname,data.StartDate);
-            if(!_USER.isNull)
-            console.log("user data has been updated succesfully");
-            
-        });
-        
-      console.log(window.location.href);
+
+    function go(){
+    // wait till everything is loaded, argument for time to wait  
+      _DB.showRegisterWindow(1000);
+            //handling async function with callback
+            if(_DB.rowsLength!=0)
+              _DB.select(function(data){
+
+                  _USER.changeUserData(data.firstname,data.lastname,data.StartDate,data.data);
+                  if(!_USER.isNull)
+                  console.log("user data has been updated succesfully");
+                  
+
+                  console.log(_USER);
+                
+              });
+              _Loading.hide();
+          
+    }
+    
         
 
      
