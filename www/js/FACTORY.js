@@ -7,12 +7,14 @@ angular.module("App")
         StartDate     : null,
         timePassed    : [
             //EXAMPLE
-                        //  year:2017,
-                        // month:{
+                        // year:2014,
+                        // months:[
+                        //    month:{
                         //     name:April,
-                        //     id:4
-                        // },
-                        // days:31
+                        //     id:4,
+                        //     days:31
+                        // }],
+                        // 
         ],
         isNull        : true,
         fullName      : function(){
@@ -127,7 +129,7 @@ angular.module("App")
         cnt++;
 
         }
-        console.error(JSON.stringify(allTimeTillToday));
+        
         obj.timePassed = allTimeTillToday;
         
     }//end of function

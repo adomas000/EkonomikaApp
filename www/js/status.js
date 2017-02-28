@@ -65,13 +65,50 @@ angular.module("App")
         function setUpTimeline(){
             var timePassed = _USER.timePassed;
             var yearNode = document.getElementById("statYear");
-            var monthNode= document.getElementById("statMonth");
+           
             
-           // for(var i = 0;i<timePassed.length;i++)
-               // for(var j=timePassed[i].i)
+        
+            //loop thru years
+            for(var i = 0;i<timePassed.length;i++){
+
+                var option = document.createElement("option");
+                option.value = timePassed[i].year;
+                option.textContent = timePassed[i].year;
+                if(i==timePassed.length-1)
+                  option.setAttribute("ng-selected","true");
+
+                yearNode.appendChild(option);
+
+                
+            }
+
+         }
+         setUpTimeline();
+               
 
 
-        }
-       
+        
 
+       $scope.handleYearChange = function(e) {
+                var monthNode= document.getElementById("statMonth");
+                var obj =[];
+            var timePassed = _USER.timePassed;
+             for(var i = 0; j<timePassed.length;i++){
+                if(timePassed[i].year == e)
+                obj = timePassed[i].months;
+            }
+
+           
+
+            for(var j = 0; j<obj.length;j++){
+
+                var option = document.createElement("option");
+                option.value = obj.month[i].id;
+                option.textContent = obj.month[i].name;
+                
+                monthNode.appendChild(option);
+
+            }
+                
+       }
 });
