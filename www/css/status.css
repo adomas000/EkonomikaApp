@@ -1,0 +1,7 @@
+.stat-opt{
+    background-color: transparent!important;
+}
+.stat-opt option{
+    background-color: transparent!important;
+    color:black!important;
+}

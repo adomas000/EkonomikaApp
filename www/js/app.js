@@ -25,7 +25,8 @@ angular.module('App', ['ionic','ngCordova',"chart.js"])
       StatusBar.styleDefault();
     }
     // database init settings
-   //_Loading.show();
+    // this need to be commented during development
+    //_Loading.show();
     var database = {
       name:"my.db",
       location:"default"
@@ -54,16 +55,20 @@ angular.module('App', ['ionic','ngCordova',"chart.js"])
                   _USER.changeUserData(data.firstname,data.lastname,data.StartDate,data.data);
                   if(!_USER.isNull)
                   console.log("user data has been updated succesfully");
+                  //sets current year to global
+                  _USER.setUpData();
+                  //sets time passed
+                  _USER.funds.startDate = {year:2016,month:4,day:19};
+                  _USER.calculateTimePassed();
+                  console.log(JSON.stringify(_USER));
                   
-
-                  console.log(_USER);
-                
               });
               _Loading.hide();
           
     }
     
         
+    
 
      
   });

@@ -1,5 +1,25 @@
 <div ng-controller="statusCtrl">
+<div class="list" id="stat-list">
 
+  <label class="item item-input item-select">
+    <div class="input-label">
+     year
+    </div>
+    <select class="stat-opt" id="statYear">
+      <option selected>Blue</option>
+    </select>
+  </label>
+
+  <label class="item item-input item-select">
+    <div class="input-label">
+    month
+    </div>
+    <select class="stat-opt" id="statMonth">
+      <option>Blue</option>
+    </select>
+  </label>
+
+</div>
 <div class="card" style="height: 150px;">
         <div class="item item-text-wrap">
                 <canvas id="myChart" >Canvas not working!</canvas>

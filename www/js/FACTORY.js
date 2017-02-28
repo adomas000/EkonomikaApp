@@ -5,6 +5,15 @@ angular.module("App")
         fname         : "",
         lname         : "",
         StartDate     : null,
+        timePassed    : [
+            //EXAMPLE
+                        //  year:2017,
+                        // month:{
+                        //     name:April,
+                        //     id:4
+                        // },
+                        // days:31
+        ],
         isNull        : true,
         fullName      : function(){
             return this.fname + " " + this.lname;
@@ -45,29 +54,88 @@ angular.module("App")
 
         },
       firstTimeInit:function(){
+          //sets up start date
             var year  = new Date().getFullYear();
-            var month = new Date().getMonth();
-            var day   = new Date().getDay();
+            var month = new Date().getMonth()+1;
+            var day   = new Date().getDate();
             
             obj.funds.startDate = {year:year,month:month,day:day};
         },
-          setUpData:function(balance){
-
+        setUpData:function(){
+            //just sets up current date
+            var year  = new Date().getFullYear();
+            var month = new Date().getMonth()+1;
+            var day   = new Date().getDate();
+            
+            obj.funds.currDate = {year:year,month:month,day:day};
         },
         insertFunds:function(moneyAdded){
 
         },
         removeFunds:function(moneyRemoved){
 
-        }
+        },
+        calculateTimePassed:function(){
+            //takes all the data from obj.funds;
+            var start = obj.funds.startDate;
+            var curr  = obj.funds.currDate;
+            var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November","December"];
+            // yearsPassed = curr.year - start.year;
+            // var months  = yearsPassed * 12;
+            // months+= curr.month - start.month;
+            var allTimeTillToday = [];
+            var cnt = 0;
+            //loop through all the years
+            for(var i = start.year; i<=curr.year; i++){
+                //creating object which will hold all of the one years months and days
+                allTimeTillToday.push({
+                    year:i,
+                    months:[]
+                });
+                if(i == curr.year)
+                for(var j = 0;j<=curr.month-1;j++){
+                    //if its current year loop till its the day of the month we need
+                    //getting current day of the month
+                    if(curr.month-1 == j)
+                        var countDays = new Date().getDate();
+                    else
+                        var countDays = new Date(i,j,0).getDate();
+                    allTimeTillToday[cnt].months.push({
+                            
+                           
+                                name:monthNames[j],
+                                id:j,
+                                days:countDays
+                            
+                    });
+                    
+                   
+                }
+                else
+                for(var j = 0;j<=11;j++){
+                    //getting day count
+                    var countDays = new Date(i,j,0).getDate();
+                   allTimeTillToday[cnt].months.push({
 
+                                name:monthNames[j],
+                                id:j,
+                                days:countDays
+                            
+                    });               
+            }
+
+        cnt++;
+
+        }
+        console.error(JSON.stringify(allTimeTillToday));
+        obj.timePassed = allTimeTillToday;
         
-    };
+    }//end of function
     //
-    
+} //end of funds
     //
     return obj;
-})
+})//end of controoler
 
 // database
 
@@ -113,6 +181,18 @@ angular.module("App")
            });
            
        }
+        obj.update = function(){
+        var data = JSON.stringify(_USER.funds);
+        var query = "UPDATE User set data = '"+ data +"' WHERE firstname = '"+ _USER.fname + "'";
+        $cordovaSQLite.execute(obj.db,query).then(function(res){
+
+                console.log("\n\nUpdated database succesfully");
+
+        },function(err){
+                console.error("database was not updated:\n"+err);
+        });
+    }
+
        obj.setRowsLength = function(){
            var query = "SELECT * FROM User" ;
            $cordovaSQLite.execute(obj.db,query).then(function(res){

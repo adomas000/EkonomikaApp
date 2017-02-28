@@ -1,6 +1,6 @@
 angular.module("App")
 
-.controller("statusCtrl",function(){
+.controller("statusCtrl",function($scope,_USER,_DB){
 
         var ctx = document.getElementById("myChart");
 
@@ -55,7 +55,23 @@ angular.module("App")
            if(points[0]==undefined)
            return;
            console.log(points[0]);
+           var point = points[0];
+           point._yScale.options.scaleLabel;
+           point._yScale.options.scaleLabel;
+           console.log(point._yScale.options.scaleLabel);
+
         };
+
+        function setUpTimeline(){
+            var timePassed = _USER.timePassed;
+            var yearNode = document.getElementById("statYear");
+            var monthNode= document.getElementById("statMonth");
+            
+           // for(var i = 0;i<timePassed.length;i++)
+               // for(var j=timePassed[i].i)
+
+
+        }
        
 
 });
