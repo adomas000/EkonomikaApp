@@ -61,7 +61,7 @@ angular.module("App")
            console.log(point._yScale.options.scaleLabel);
 
         };
-
+        //part where I set up selections of year and months
         function setUpTimeline(){
             var timePassed = _USER.timePassed;
             var yearNode = document.getElementById("statYear");
@@ -90,25 +90,40 @@ angular.module("App")
         
 
        $scope.handleYearChange = function(e) {
-                var monthNode= document.getElementById("statMonth");
+
+           console.log("year selected");
+                var monthNode = document.getElementById("statMonth");
+                if(monthNode.children.length>1)
+                    DeleteMonthChildren(monthNode);
                 var obj =[];
             var timePassed = _USER.timePassed;
-             for(var i = 0; j<timePassed.length;i++){
+             for(var i = 0; i<timePassed.length;i++){
                 if(timePassed[i].year == e)
-                obj = timePassed[i].months;
+                {
+                    obj = timePassed[i].months;
+                    break;
+                }
+                
             }
 
            
 
-            for(var j = 0; j<obj.length;j++){
+            for(var i = 0; i<obj.length;i++){
 
                 var option = document.createElement("option");
-                option.value = obj.month[i].id;
-                option.textContent = obj.month[i].name;
+                option.setAttribute("value",obj[i].id);
+                option.textContent = obj[i].name;
                 
                 monthNode.appendChild(option);
 
             }
                 
+       }
+
+       function DeleteMonthChildren(month){
+
+            while(month.firstChild)
+                month.removeChild(month.firstChild);
+
        }
 });

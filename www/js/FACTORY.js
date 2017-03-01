@@ -87,6 +87,7 @@ angular.module("App")
             // months+= curr.month - start.month;
             var allTimeTillToday = [];
             var cnt = 0;
+            
             //loop through all the years
             for(var i = start.year; i<=curr.year; i++){
                 //creating object which will hold all of the one years months and days
@@ -95,36 +96,48 @@ angular.module("App")
                     months:[]
                 });
                 if(i == curr.year)
-                for(var j = 0;j<=curr.month-1;j++){
-                    //if its current year loop till its the day of the month we need
-                    //getting current day of the month
-                    if(curr.month-1 == j)
-                        var countDays = new Date().getDate();
-                    else
+                    for(var j = 0;j<=curr.month-1;j++){
+                        //if its current year loop till its the day of the month we need
+                        //getting current day of the month
+                        if(curr.month-1 == j)
+                            var countDays = new Date().getDate();
+                        else
+                            var countDays = new Date(i,j,0).getDate();
+                        allTimeTillToday[cnt].months.push({
+                                
+                            
+                                    name:monthNames[j],
+                                    id:j,
+                                    days:countDays
+                                
+                        });
+                        
+                    
+                    }
+                else if(i == start.year)
+                    for(var j = start.month;j<12;j++){
+                        //getting day count
                         var countDays = new Date(i,j,0).getDate();
                     allTimeTillToday[cnt].months.push({
-                            
-                           
-                                name:monthNames[j],
-                                id:j,
-                                days:countDays
-                            
-                    });
-                    
-                   
+
+                                    name:monthNames[j],
+                                    id:j,
+                                    days:countDays
+                                
+                        });               
                 }
                 else
-                for(var j = 0;j<=11;j++){
-                    //getting day count
-                    var countDays = new Date(i,j,0).getDate();
-                   allTimeTillToday[cnt].months.push({
+                    for(var j = 0;j<12;j++){
+                        //getting day count
+                        var countDays = new Date(i,j,0).getDate();
+                    allTimeTillToday[cnt].months.push({
 
-                                name:monthNames[j],
-                                id:j,
-                                days:countDays
-                            
-                    });               
-            }
+                                    name:monthNames[j],
+                                    id:j,
+                                    days:countDays
+                                
+                        });               
+                }
 
         cnt++;
 
