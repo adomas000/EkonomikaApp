@@ -55,10 +55,7 @@ angular.module("App")
            if(points[0]==undefined)
            return;
            console.log(points[0]);
-           var point = points[0];
-           point._yScale.options.scaleLabel;
-           point._yScale.options.scaleLabel;
-           console.log(point._yScale.options.scaleLabel);
+           
 
         };
         //part where I set up selections of year and months
@@ -91,7 +88,7 @@ angular.module("App")
 
        $scope.handleYearChange = function(e) {
 
-           console.log("year selected");
+           
                 var monthNode = document.getElementById("statMonth");
                 if(monthNode.children.length>1)
                     DeleteMonthChildren(monthNode);

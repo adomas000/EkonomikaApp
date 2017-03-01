@@ -23,6 +23,11 @@ angular.module("App")
         url:'/status',
         templateUrl:"templates/status.html"
     })
+    .state("balance",{
+        cache:false,
+        url:'/balance',
+        templateUrl:"templates/balance.html"
+    })
     .state("register",{
         url: '/register',
         templateUrl: 'templates/register.html'

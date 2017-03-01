@@ -210,6 +210,7 @@ angular.module("App")
 
        obj.setRowsLength = function(){
            var query = "SELECT * FROM User" ;
+           try{
            $cordovaSQLite.execute(obj.db,query).then(function(res){
                
                 // for(var i =0;i<res.rows.length;i++)
@@ -219,7 +220,9 @@ angular.module("App")
            }, function(err){
                     console.error(err.message);
            });
-           
+           }catch(e){
+               console.log(e);
+           }
            
        }
 
