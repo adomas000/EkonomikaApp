@@ -143,7 +143,9 @@ angular.module("App")
                
                      }
             }
-
+/**
+ * dar nesugalvojau sito
+ */
             var days = new Date(year,month,0).getDate();
             var latest = 0;
             for(var i = 1;i<=days;i++){
