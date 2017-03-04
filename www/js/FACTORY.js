@@ -77,6 +77,10 @@ angular.module("App")
             var thisDate = false;
             var indx = null;
             var moneyAdded = parseFloat(moneyAdded).toFixed(2);
+            moneyAdded = parseFloat(moneyAdded);
+            var currBalance = funds.currBalance;
+            var newBalance  = currBalance + moneyAdded;
+            
             //
             var time = new Date().getHours() + ":" + new Date().getMinutes();
         
@@ -94,7 +98,7 @@ angular.module("App")
             }
             // if not exist push new day 
             if(!thisDate){
-                var newBalance = funds.currBalance+moneyAdded;
+                //var newBalance = parseFloat(funds.currBalance)+moneyAdded;
                 obj.funds.data.push({
                         date:funds.currDate,
                         balance:newBalance,
@@ -108,7 +112,7 @@ angular.module("App")
             }
             //if this day exist just add data to this day
             else{
-                obj.funds.data[indx].balance += moneyAdded;
+                obj.funds.data[indx].balance = newBalance;
                 obj.funds.data[indx].dayData.push({
 
                     balanceChange:"+"+moneyAdded,
@@ -118,13 +122,17 @@ angular.module("App")
                 });
             }
            obj.funds.currBalance += parseFloat(moneyAdded); 
-           obj.funds.currBalance =  obj.funds.currBalance.toFixed(2);
+           //obj.funds.currBalance =  obj.funds.currBalance.toFixed(2);
         },
         removeFunds:function(moneyRemoved,note){
             var funds = obj.funds;
             var thisDate = false;
             var indx = null;
-            var moneyRemoved = moneyRemoved.toFixed(2);
+            var moneyRemoved = parseFloat(moneyRemoved).toFixed(2);
+            moneyRemoved = parseFloat(moneyRemoved);
+            var currBalance = funds.currBalance;
+            var newBalance  = currBalance + moneyRemoved;
+            
             //
             var time = new Date().getHours() + ":" + new Date().getMinutes();
         
@@ -142,7 +150,7 @@ angular.module("App")
             }
             // if not exist push new day 
             if(!thisDate){
-                var newBalance = funds.currBalance+moneyRemoved;
+               
                 obj.funds.data.push({
                         date:funds.currDate,
                         balance:newBalance,
@@ -156,7 +164,7 @@ angular.module("App")
             }
             //if this day exist just add data to this day
             else{
-                obj.funds.data[indx].balance += moneyRemoved;
+                obj.funds.data[indx].balance = newBalance;
                 obj.funds.data[indx].dayData.push({
 
                     balanceChange:"-"+moneyRemoved,
@@ -166,7 +174,7 @@ angular.module("App")
                 });
             }
             obj.funds.currBalance -= parseFloat(moneyRemoved);
-            obj.funds.currBalance =  obj.funds.currBalance.toFixed(2);
+            //obj.funds.currBalance =  obj.funds.currBalance.toFixed(2);
             
         },
         calculateTimePassed:function(){

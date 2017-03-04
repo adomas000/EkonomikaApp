@@ -5,7 +5,7 @@
     <div class="input-label">
      year
     </div>
-    <select class="stat-opt" id="statYear" data-ng-model="option" ng-change="handleYearChange(option)">
+    <select class="stat-opt" id="statYear" data-ng-model="year" ng-change="handleYearChange(year)">
             <option ng-selected="true">n/a</option>
     </select>
   </label>
@@ -14,7 +14,7 @@
     <div class="input-label">
     month
     </div>
-    <select class="stat-opt" id="statMonth">
+    <select class="stat-opt" id="statMonth" data-ng-model="month" ng-change="setUpChartData(year,month)">
             <option ng-selected="true">n/a</option>
     </select>
   </label>

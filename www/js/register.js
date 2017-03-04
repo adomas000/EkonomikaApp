@@ -9,6 +9,7 @@ angular.module("App")
         
         _USER.firstTimeInit();
         _USER.changeUserData(fname,lname,time,JSON.stringify(_USER.funds));
+        _USER.setUpData();
         _DB.insert(fname,lname,time,_USER.funds);
         console.log(JSON.stringify(_USER));
         window.location.href = window.location.pathname + "#/dashboard";

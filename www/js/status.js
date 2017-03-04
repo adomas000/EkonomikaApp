@@ -1,11 +1,22 @@
 angular.module("App")
 
 .controller("statusCtrl",function($scope,_USER,_DB){
+        /**
+        * labels and data
+        */
+        var labels = [];
+        var data   = [];
+        //
 
+
+        /**
+         * 
+         * outputing the Chart
+         */
         var ctx = document.getElementById("myChart");
 
         var data = {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    labels: labels,
                     
                     datasets: [
                         {
@@ -27,7 +38,7 @@ angular.module("App")
                             pointHoverBorderWidth: 2,
                             pointRadius: 1,
                             pointHitRadius: 10,
-                            data: [86,50, 80, 81, 56, 55, 40],
+                            data: data,
                             spanGaps: false,
                         }
                     ]
@@ -36,19 +47,11 @@ angular.module("App")
 
         var myLineChart = new Chart(ctx, {
             type: 'line',
-            data: data,
-            options:{
-                showTooltips: true,
-                tooltipTemplate:  "Students",
-                tooltip:{
-                    mode:'label'
-                },
-                responsive: true,
-                xLabel: "HEY"
-
-            }
+            data: data
 
         });
+
+
  
         ctx.onclick = function(e){
            var points = myLineChart.getElementsAtEvent(e);
@@ -85,11 +88,12 @@ angular.module("App")
 
 
         
+        var monthNode = document.getElementById("statMonth");
 
        $scope.handleYearChange = function(e) {
 
            
-                var monthNode = document.getElementById("statMonth");
+                
                 if(monthNode.children.length>1)
                     DeleteMonthChildren(monthNode);
                 var obj =[];
@@ -114,6 +118,7 @@ angular.module("App")
                 monthNode.appendChild(option);
 
             }
+            
                 
        }
 
@@ -123,4 +128,42 @@ angular.module("App")
                 month.removeChild(month.firstChild);
 
        }
+       var monthData =[];
+
+       $scope.setUpChartData = function(year,month){
+            var data = _USER.funds.data;
+            
+            //find the data we need
+            for(var i=0;i<data.length;i++)
+            {
+                if(data[i].date.year==year&&data[i].date.month-1==month)
+                     {
+                         monthData.push(data[i]);
+                        //  console.log(JSON.stringify(monthData));
+               
+                     }
+            }
+
+            var days = new Date(year,month,0).getDate();
+            var latest = 0;
+            for(var i = 1;i<=days;i++){
+                labels.push(i);
+                for(var j = 0;j<monthData.length;j++){
+                    
+                    if(monthData[j].date.day = i){
+                        data.push(monthData.balance);
+                        latest = monthData.balance;
+                        
+                    }
+                    else{
+                        data.push(latest);
+                        
+                    }
+                }
+            }
+            
+            
+
+       }
+       
 });
