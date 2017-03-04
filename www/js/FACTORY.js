@@ -118,7 +118,7 @@ angular.module("App")
                 });
             }
             obj.funds.currBalance += parseFloat(moneyAdded); 
-           
+           obj.funds.currBalance =  obj.funds.currBalance.toFixed(2);
         },
         removeFunds:function(moneyRemoved,note){
             var funds = obj.funds;
@@ -165,7 +165,8 @@ angular.module("App")
 
                 });
             }
-            obj.funds.currBalance -= parseFloat(moneyRemoved); 
+            obj.funds.currBalance -= parseFloat(moneyRemoved);
+            obj.funds.currBalance =  obj.funds.currBalance.toFixed(2);
             
         },
         calculateTimePassed:function(){
