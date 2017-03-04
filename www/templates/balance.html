@@ -11,10 +11,10 @@
     <div class="item item-divider" style="text-align: center;margin-top:40px;">
             Latest changes
       </div>
-<div style="overflow: scroll; height:400px;overflow-x: hidden;">
+<div style="overflow: scroll!important; height: calc(100% - 200px);;overflow-x: hidden;">
       
-     <div class="list">
-            
+     <div class="list" >
+           
             <a class="item item-icon-left" ng-repeat="item in latestChanges" href="#">
                   <i class="icon ion-cash" style="color:{{item.color}}!important;"></i>
                   <table style="width:100%">
@@ -32,6 +32,9 @@
                   </tr>
                   </table>
             </a>
+
+         
+
      </div>
 </div>
 </div>

@@ -117,7 +117,7 @@ angular.module("App")
 
                 });
             }
-            obj.funds.currBalance += parseFloat(moneyAdded); 
+           obj.funds.currBalance += parseFloat(moneyAdded); 
            obj.funds.currBalance =  obj.funds.currBalance.toFixed(2);
         },
         removeFunds:function(moneyRemoved,note){
