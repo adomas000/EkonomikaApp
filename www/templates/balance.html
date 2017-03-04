@@ -4,6 +4,7 @@
             font-family: 'numbers'; /*a name to be used later*/
             src: url("fonts/Slabo27px-Regular.ttf"); /*URL to font*/
         }
+
     </style>
     <h1 style="text-align: center;font-family: numbers;" id="balance">{{balance}}$</h1>
     
@@ -14,49 +15,22 @@
       
      <div class="list">
             
-            <a class="item item-icon-left" href="#">
-                  <i class="icon ion-email"></i>
-                  Check mail
-            </a>
+            <a class="item item-icon-left" ng-repeat="item in latestChanges" href="#">
+                  <i class="icon ion-cash" style="color:{{item.color}}!important;"></i>
+                  <table style="width:100%">
+                  <tr>
+                        <td style="color:{{item.color}}!important;" width="125">
+                              {{item.change}}
+                        </td>
 
-               <a class="item item-icon-left" href="#">
-                  <i class="icon ion-email"></i>
-                  Check mail
-            </a>
-
-               <a class="item item-icon-left" href="#">
-                  <i class="icon ion-email"></i>
-                  Check mail
-            </a>
-
-            <a class="item item-icon-left" href="#">
-                  <i class="icon ion-email"></i>
-                  Check mail
-            </a>
-
-               <a class="item item-icon-left" href="#">
-                  <i class="icon ion-email"></i>
-                  Check mail
-            </a>
-
-               <a class="item item-icon-left" href="#">
-                  <i class="icon ion-email"></i>
-                  Check mail
-            </a>
-
-            <a class="item item-icon-left" href="#">
-                  <i class="icon ion-email"></i>
-                  Check mail
-            </a>
-
-               <a class="item item-icon-left" href="#">
-                  <i class="icon ion-email"></i>
-                  Check mail
-            </a>
-
-               <a class="item item-icon-left" href="#">
-                  <i class="icon ion-email"></i>
-                  Check mail
+                        <td align="left">
+                              {{item.note}}
+                        </td>
+                        <td align="right">
+                              <i class="icon ion-ios-information-outline" style="all:unset"></i>
+                        </td>
+                  </tr>
+                  </table>
             </a>
      </div>
 </div>

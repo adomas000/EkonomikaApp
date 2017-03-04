@@ -1,14 +1,19 @@
-<div>
+<div ng-controller="addFundsCtrl">
     <h2 style="text-align: center;margin-top: 20px;">Add funds</h2>
-<div class="list">
-  <label class="item item-input item-floating-label">
-    <span class="input-label">How much to add?</span>
-    
-    <input type="number" placeholder="How much to add?">
-  </label>
-  <label class="item item-input item-floating-label" style="height:100px;">
-    <span class="input-label">Note</span>
-    <textarea type="text" placeholder="Note" style="height:100px;"></textarea>
-  </label>
-</div>
+     <form name="myForm" novalidate>
+      <div class="list">
+        <label class="item item-input item-floating-label">
+          <span class="input-label">How much to add?</span>
+          
+          <input type="number" ng-model="moneyToAdd" placeholder="How much to add?" required>
+        </label>
+        <label class="item item-input item-floating-label" style="height:100px;">
+          <span class="input-label">Note</span>
+          <textarea type="text" placeholder="Note" ng-model="note" style="height:100px;" required></textarea>
+        </label>
+      </div>
+      <button ng-disabled="myForm.$invalid" class="button button-full button-balanced" style="padding: 10px 0 10px" ng-click="addFunds(moneyToAdd,note)" href="#/dashboard">
+        Add
+      </button>
+     </form>
 </div>

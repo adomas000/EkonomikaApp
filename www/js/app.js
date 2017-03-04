@@ -66,6 +66,8 @@ angular.module('App', ['ionic','ngCordova',"chart.js"])
               _Loading.hide();
           
     }
+
+    
     
         
     

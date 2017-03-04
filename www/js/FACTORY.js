@@ -71,11 +71,102 @@ angular.module("App")
             
             obj.funds.currDate = {year:year,month:month,day:day};
         },
-        insertFunds:function(moneyAdded){
+        insertFunds:function(moneyAdded,note){
+            
+            var funds = obj.funds;
+            var thisDate = false;
+            var indx = null;
+            var moneyAdded = parseFloat(moneyAdded).toFixed(2);
+            //
+            var time = new Date().getHours() + ":" + new Date().getMinutes();
+        
+            /**
+             * search if this date already exists
+             */
+            for(var i = funds.data.length;i>0;--i)
+            {
+                if(funds.data[i-1].date == funds.currDate)
+                {   
+                    thisDate = true;
+                    indx = i-1;
+                    break;
+                }
+            }
+            // if not exist push new day 
+            if(!thisDate){
+                var newBalance = funds.currBalance+moneyAdded;
+                obj.funds.data.push({
+                        date:funds.currDate,
+                        balance:newBalance,
+                        dayData:[{
+                            balanceChange:"+"+moneyAdded,
+                            time:time,
+                            item:note
+                        }]
 
+                });
+            }
+            //if this day exist just add data to this day
+            else{
+                obj.funds.data[indx].balance += moneyAdded;
+                obj.funds.data[indx].dayData.push({
+
+                    balanceChange:"+"+moneyAdded,
+                             time:time,
+                             item:note
+
+                });
+            }
+            obj.funds.currBalance += parseFloat(moneyAdded); 
+           
         },
-        removeFunds:function(moneyRemoved){
+        removeFunds:function(moneyRemoved,note){
+            var funds = obj.funds;
+            var thisDate = false;
+            var indx = null;
+            var moneyRemoved = moneyRemoved.toFixed(2);
+            //
+            var time = new Date().getHours() + ":" + new Date().getMinutes();
+        
+            /**
+             * search if this date already exists
+             */
+            for(var i = funds.data.length;i>0;--i)
+            {
+                if(funds.data[i-1].date == funds.currDate)
+                {   
+                    thisDate = true;
+                    indx = i-1;
+                    break;
+                }
+            }
+            // if not exist push new day 
+            if(!thisDate){
+                var newBalance = funds.currBalance+moneyRemoved;
+                obj.funds.data.push({
+                        date:funds.currDate,
+                        balance:newBalance,
+                        dayData:[{
+                            balanceChange:"-"+moneyRemoved,
+                            time:time,
+                            item:note
+                        }]
 
+                });
+            }
+            //if this day exist just add data to this day
+            else{
+                obj.funds.data[indx].balance += moneyRemoved;
+                obj.funds.data[indx].dayData.push({
+
+                    balanceChange:"-"+moneyRemoved,
+                             time:time,
+                             item:note
+
+                });
+            }
+            obj.funds.currBalance -= parseFloat(moneyRemoved); 
+            
         },
         calculateTimePassed:function(){
             //takes all the data from obj.funds;
@@ -231,6 +322,13 @@ angular.module("App")
               console.log("DatabaseDelete - "+succ);
               obj.db = null;
               obj.setRowsLength();
+              _USER.funds={
+           startBalance:0,
+            currBalance:0,
+             startDate :{year:null,month:null,day:null},
+               currDate:{year:null,month:null,day:null},
+                  data :[]
+                 }
           }, function(err){
               console.error(err);
           });
