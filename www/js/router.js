@@ -28,6 +28,14 @@ angular.module("App")
         url:'/balance',
         templateUrl:"templates/balance.html"
     })
+    .state("addFunds",{
+        url:'/addFunds',
+        templateUrl:"templates/addFunds.html"
+    })
+    .state("removeFunds",{
+        url:'/removeFunds',
+        templateUrl:"templates/removeFunds.html"
+    })
     .state("register",{
         url: '/register',
         templateUrl: 'templates/register.html'

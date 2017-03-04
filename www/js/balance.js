@@ -16,4 +16,6 @@ angular.module("App")
     $scope.items = ["a","ad","ae","ra","af","ag","aj","am","ac","av","ab",];
     $scope.scroll = "true";
 
+    $scope.balance = _USER.funds.currBalance;
+
 });
