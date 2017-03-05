@@ -128,6 +128,7 @@ angular.module("App")
                 month.removeChild(month.firstChild);
 
        }
+       //get month data
        var monthData =[];
 
        $scope.setUpChartData = function(year,month){
@@ -139,7 +140,7 @@ angular.module("App")
                 if(data[i].date.year==year&&data[i].date.month-1==month)
                      {
                          monthData.push(data[i]);
-                        //  console.log(JSON.stringify(monthData));
+                          console.log(JSON.stringify(monthData));
                
                      }
             }
@@ -152,7 +153,7 @@ angular.module("App")
                 labels.push(i);
                 for(var j = 0;j<monthData.length;j++){
                     
-                    if(monthData[j].date.day = i){
+                    if(monthData[j].date.day == i){
                         data.push(monthData.balance);
                         latest = monthData.balance;
                         
@@ -163,6 +164,7 @@ angular.module("App")
                     }
                 }
             }
+            console.log(JSON.stringify(data));
             
             
 
